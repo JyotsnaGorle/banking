@@ -15,7 +15,9 @@ type CustomerHandlers struct {
 // handler and should have a dpendency of the service
 func (ch *CustomerHandlers) getAllCustomers(w http.ResponseWriter, r *http.Request) {
 
-	customers, err := ch.service.GetAllCustomer()
+	status := r.URL.Query().Get("status")
+
+	customers, err := ch.service.GetAllCustomer(status)
 
 	if err != nil {
 		writeResponse(w, err.Code, err.AsMessage())

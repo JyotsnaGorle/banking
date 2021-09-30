@@ -13,6 +13,7 @@ type Customer struct {
 
 // secondary port - protocol
 type CustomerRepository interface {
-	FindAll() ([]Customer, *errs.AppError)
+	// status == 1, status == 0, status == ""
+	FindAll(status string) ([]Customer, *errs.AppError)
 	ById(string) (*Customer, *errs.AppError)
 }
