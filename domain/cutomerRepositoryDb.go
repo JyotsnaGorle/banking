@@ -2,7 +2,6 @@ package domain
 
 import (
 	"database/sql"
-	"log"
 	"time"
 
 	"github.com/JyotsnaGorle/banking/app/errs"
@@ -30,7 +29,7 @@ func (d CustomerRepositoryDb) FindAll(status string) ([]Customer, *errs.AppError
 	}
 
 	if err != nil {
-		log.Println("Error while querying customer table" + err.Error())
+		logger.Error("Error while querying customer table" + err.Error())
 		return nil, errs.NewNotFoundError("Error while querying customer table")
 	}
 
@@ -63,7 +62,7 @@ func (d CustomerRepositoryDb) ById(id string) (*Customer, *errs.AppError) {
 		if err == sql.ErrNoRows {
 			return nil, errs.NewNotFoundError("Customer not found")
 		}
-		log.Println("Error while scanning customer" + err.Error())
+		logger.Error("Error while scanning customer" + err.Error())
 		return nil, errs.NewUnexpectedError("Unexpected database error")
 	}
 
