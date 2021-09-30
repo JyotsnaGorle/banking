@@ -13,7 +13,7 @@ type CustomerRepositoryDb struct {
 	client *sql.DB
 }
 
-func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
+func (d CustomerRepositoryDb) FindAll() ([]Customer, *errs.AppError) {
 
 	findAllSql := "select customer_id, name, city, zipcode, date_of_birth, status from customers"
 
@@ -21,7 +21,7 @@ func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
 
 	if err != nil {
 		log.Println("Error while querying customer table" + err.Error())
-		return nil, err
+		return nil, errs.NewNotFoundError("Error while querying customer table")
 	}
 
 	customers := make([]Customer, 0)
@@ -31,7 +31,7 @@ func (d CustomerRepositoryDb) FindAll() ([]Customer, error) {
 		err := rows.Scan(&c.Id, &c.Name, &c.City, &c.Zipcode, &c.DateOfBirth, &c.Status)
 		if err != nil {
 			log.Println("Error while scanning customer table" + err.Error())
-			return nil, err
+			return nil, errs.NewNotFoundError("Error while scanning customer table")
 		}
 		customers = append(customers, c)
 	}
