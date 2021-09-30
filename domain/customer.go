@@ -1,5 +1,7 @@
 package domain
 
+import "github.com/JyotsnaGorle/banking/app/errs"
+
 type Customer struct {
 	Id          string
 	Name        string `json:"full_name" xml:"full_name"`
@@ -12,5 +14,5 @@ type Customer struct {
 // secondary port - protocol
 type CustomerRepository interface {
 	FindAll() ([]Customer, error)
-	ById(string) (*Customer, error)
+	ById(string) (*Customer, *errs.AppError)
 }
