@@ -30,8 +30,12 @@ func (d CustomerRepositoryDb) FindAll() ([]Customer, *errs.AppError) {
 		var c Customer
 		err := rows.Scan(&c.Id, &c.Name, &c.City, &c.Zipcode, &c.DateOfBirth, &c.Status)
 		if err != nil {
+			if err == sql.ErrNoRows {
+				log.Println("Error while scanning customer table" + err.Error())
+				return nil, errs.NewNotFoundError("No values found")
+			}
 			log.Println("Error while scanning customer table" + err.Error())
-			return nil, errs.NewNotFoundError("Error while scanning customer table")
+			return nil, errs.NewUnexpectedError("Unexpected database error")
 		}
 		customers = append(customers, c)
 	}
