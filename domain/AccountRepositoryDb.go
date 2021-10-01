@@ -3,7 +3,7 @@ package domain
 import (
 	"strconv"
 
-	"github.com/JyotsnaGorle/banking/app/errs"
+	"github.com/JyotsnaGorle/banking/errs"
 	"github.com/JyotsnaGorle/banking/logger"
 	"github.com/jmoiron/sqlx"
 )

@@ -3,9 +3,9 @@ package service
 import (
 	"time"
 
-	"github.com/JyotsnaGorle/banking/app/errs"
 	"github.com/JyotsnaGorle/banking/domain"
 	"github.com/JyotsnaGorle/banking/dto"
+	"github.com/JyotsnaGorle/banking/errs"
 )
 
 type AccountService interface {

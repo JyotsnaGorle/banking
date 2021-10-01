@@ -3,7 +3,7 @@ package domain
 import (
 	"database/sql"
 
-	"github.com/JyotsnaGorle/banking/app/errs"
+	"github.com/JyotsnaGorle/banking/errs"
 	"github.com/JyotsnaGorle/banking/logger"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
